@@ -1,0 +1,35 @@
+PySide6>=6.6
+pandas>=2.0
+numpy>=1.24
+scikit-learn>=1.3
+joblib>=1.3
+openpyxl>=3.1
+pyarrow>=14.0
+psutil>=5.9
+matplotlib>=3.8
+
+# Comparison dashboard stats/tests + dendrograms
+scipy>=1.11
+
+# PDF report export
+reportlab>=4.0
+
+# Explainability stack
+plotly>=5.18
+shap>=0.45
+lime>=0.2
+dalex>=1.7
+
+# Optional model libraries (enables additional algorithms)
+xgboost>=2.0
+lightgbm>=4.0
+catboost>=1.2
+hdbscan>=0.8
+umap-learn>=0.5
+
+# scikit-learn-extra is used for K-Medoids. On Windows + Python 3.12 it can require MSVC build tools.
+scikit-learn-extra>=0.3; python_version < "3.12"
+
+# Optional tuning libraries
+optuna>=3.6
+hyperopt>=0.2

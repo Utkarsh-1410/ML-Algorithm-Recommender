@@ -1,0 +1,42 @@
+{
+    "application": {
+        "name": "ARCSaathi",
+        "version": "1.0.0",
+        "author": "ML Pipeline Team"
+    },
+    "paths": {
+        "default_data_dir": "./data",
+        "default_model_dir": "./models",
+        "default_export_dir": "./exports",
+        "logs_dir": "./logs"
+    },
+    "ui": {
+        "theme": "light",
+        "window_width": 1400,
+        "window_height": 900,
+        "font_family": "Segoe UI",
+        "font_size": 10
+    },
+    "compute": {
+        "max_workers": 4,
+        "memory_limit_mb": 4096,
+        "use_gpu": false,
+        "gpu_device": 0
+    },
+    "autosave": {
+        "enabled": true,
+        "interval_seconds": 300,
+        "max_backups": 5
+    },
+    "export": {
+        "default_format": "csv",
+        "include_metadata": true,
+        "compression": false
+    },
+    "ml": {
+        "train_test_split": 0.8,
+        "random_state": 42,
+        "cv_folds": 5,
+        "max_iterations": 1000
+    }
+}
