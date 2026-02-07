@@ -21,6 +21,7 @@ from .model_recommendation_engine import (
 	RecommendationResult,
 	ModelRecommendationEngine,
 )
+from .pdf_generator import PDFReportGenerator, ReportConfig
 
 __all__ = [
 	'DataModel',
@@ -39,4 +40,6 @@ __all__ = [
 	'ModelRecommendation',
 	'RecommendationResult',
 	'ModelRecommendationEngine',
+	'PDFReportGenerator',
+	'ReportConfig',
 ]

@@ -19,6 +19,7 @@ from .model_training_controller import ModelTrainingController
 from .evaluation_controller import EvaluationComparisonController
 from .recommender_controller import ModelRecommenderController
 from .explainability_controller import ExplainabilityController
+from .report_controller import ReportController
 
 
 class MainController(QObject):
@@ -48,6 +49,7 @@ class MainController(QObject):
         self.evaluation = EvaluationComparisonController(state, data_model, ml_model, evaluation_model)
         self.recommender = ModelRecommenderController(state, data_model, ml_model)
         self.explainability = ExplainabilityController(data_model, ml_model)
+        self.report = ReportController(data_model, self._log)
         self.task_detection = TaskDetectionModel()
 
         # One-time wiring for recommender output
@@ -59,7 +61,7 @@ class MainController(QObject):
         self.window.help_requested.connect(self._help)
 
         # Bubble up errors to UI
-        for c in [self.data_processing, self.training, self.evaluation, self.recommender, self.explainability, self.state]:
+        for c in [self.data_processing, self.training, self.evaluation, self.recommender, self.explainability, self.report, self.state]:
             if hasattr(c, "error_occurred"):
                 c.error_occurred.connect(lambda msg, parent=window: show_error(parent, "ARCSaathi Error", msg))
 
