@@ -28,7 +28,7 @@ from .tabs import (
     ExplainabilityTab,
     PredictiveMaintenanceTab,
 )
-from .widgets import HeaderBar, WorkflowNavigator, TabPage, HelpDialog
+from .widgets import HeaderBar, WorkflowNavigator, TabPage, HelpDialog, UserProfileDialog
 
 
 class MainWindow(QMainWindow):
@@ -48,6 +48,7 @@ class MainWindow(QMainWindow):
         # Header
         self.header = HeaderBar(settings_manager=settings_manager)
         self.header.help_clicked.connect(self._show_help_dialog)
+        self.header.profile_clicked.connect(self._show_profile_dialog)
         self.header.settings_clicked.connect(self.theme_toggle_requested)
         self.header.export_clicked.connect(self.export_requested)
 
@@ -180,6 +181,11 @@ class MainWindow(QMainWindow):
     def _show_help_dialog(self) -> None:
         """Show help dialog window."""
         dialog = HelpDialog(self)
+        dialog.exec()
+
+    def _show_profile_dialog(self) -> None:
+        """Show user profile dialog window."""
+        dialog = UserProfileDialog(self)
         dialog.exec()
 
     # ---- Internal wiring ----
