@@ -6,6 +6,7 @@ from .training_tab import ModelTrainingTuningTab
 from .results_tab import ResultsComparisonTab
 from .recommender_tab import ModelRecommenderTab
 from .explainability_tab import ExplainabilityTab
+from .predictive_maintenance_tab import PredictiveMaintenanceTab
 
 __all__ = [
     "DataLoadingProfilingTab",
@@ -14,4 +15,5 @@ __all__ = [
     "ResultsComparisonTab",
     "ModelRecommenderTab",
     "ExplainabilityTab",
+    "PredictiveMaintenanceTab",
 ]

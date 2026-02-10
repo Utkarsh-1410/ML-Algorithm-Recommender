@@ -33,3 +33,10 @@ scikit-learn-extra>=0.3; python_version < "3.12"
 # Optional tuning libraries
 optuna>=3.6
 hyperopt>=0.2
+
+# HTTP client for API integration
+requests>=2.31
+
+# Optional: Flask for sample API server
+flask>=3.0
+flask-cors>=4.0

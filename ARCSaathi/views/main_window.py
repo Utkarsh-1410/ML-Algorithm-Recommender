@@ -26,6 +26,7 @@ from .tabs import (
     ResultsComparisonTab,
     ModelRecommenderTab,
     ExplainabilityTab,
+    PredictiveMaintenanceTab,
 )
 from .widgets import HeaderBar, WorkflowNavigator, TabPage
 
@@ -68,6 +69,7 @@ class MainWindow(QMainWindow):
         self.tab_results = ResultsComparisonTab()
         self.tab_recommender = ModelRecommenderTab()
         self.tab_explainability = ExplainabilityTab()
+        self.tab_predictive_maintenance = PredictiveMaintenanceTab()
 
         # Wrap each in a consistent header container
         self.page_data = TabPage("Data Loading & Profiling", self.tab_data)
@@ -76,6 +78,7 @@ class MainWindow(QMainWindow):
         self.page_results = TabPage("Results & Comparison", self.tab_results)
         self.page_recommender = TabPage("Model Recommender", self.tab_recommender)
         self.page_explainability = TabPage("Explainability & Monitoring", self.tab_explainability)
+        self.page_predictive_maintenance = TabPage("Predictive Maintenance", self.tab_predictive_maintenance)
 
         self.page_data.help_clicked.connect(lambda: self.help_requested.emit("tab:data"))
         self.page_preprocess.help_clicked.connect(lambda: self.help_requested.emit("tab:preprocessing"))
@@ -83,6 +86,7 @@ class MainWindow(QMainWindow):
         self.page_results.help_clicked.connect(lambda: self.help_requested.emit("tab:results"))
         self.page_recommender.help_clicked.connect(lambda: self.help_requested.emit("tab:recommender"))
         self.page_explainability.help_clicked.connect(lambda: self.help_requested.emit("tab:explainability"))
+        self.page_predictive_maintenance.help_clicked.connect(lambda: self.help_requested.emit("tab:predictive_maintenance"))
 
         self.tabs.addTab(self.page_data, "Data Loading & Profiling")
         self.tabs.addTab(self.page_preprocess, "Preprocessing Pipeline")
@@ -90,6 +94,7 @@ class MainWindow(QMainWindow):
         self.tabs.addTab(self.page_results, "Results & Comparison")
         self.tabs.addTab(self.page_recommender, "Model Recommender")
         self.tabs.addTab(self.page_explainability, "Explainability")
+        self.tabs.addTab(self.page_predictive_maintenance, "Predictive Maintenance")
 
         # Layout: header on top, splitter for sidebar + tabs
         splitter = QSplitter(Qt.Horizontal)
@@ -213,6 +218,9 @@ class MainWindow(QMainWindow):
         for tab_index, step_index in step_for_tab.items():
             btn = self.workflow.btn_group.button(step_index)
             self.tabs.setTabEnabled(tab_index, bool(btn and btn.isEnabled()))
+        
+        # Predictive Maintenance tab (tab 6) is always enabled - it's a standalone feature
+        self.tabs.setTabEnabled(6, True)
 
     def _step_for_tab(self, tab_index: int) -> int:
         # Default highlight per tab
