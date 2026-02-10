@@ -7,7 +7,6 @@ from .results_tab import ResultsComparisonTab
 from .recommender_tab import ModelRecommenderTab
 from .explainability_tab import ExplainabilityTab
 from .predictive_maintenance_tab import PredictiveMaintenanceTab
-from .help_tab import HelpDocumentationTab
 
 __all__ = [
     "DataLoadingProfilingTab",
@@ -17,5 +16,4 @@ __all__ = [
     "ModelRecommenderTab",
     "ExplainabilityTab",
     "PredictiveMaintenanceTab",
-    "HelpDocumentationTab",
 ]
