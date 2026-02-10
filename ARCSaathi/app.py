@@ -91,8 +91,8 @@ def create_app() -> tuple[QApplication, MainWindow, MainController]:
     ml_model = MLModel()
     evaluation_model = EvaluationModel()
 
-    # Window
-    window = MainWindow()
+    # Window (pass settings for theme button)
+    window = MainWindow(settings_manager=settings)
     window.resize(int(settings.get("ui.window_width", 1400)), int(settings.get("ui.window_height", 900)))
 
     # Theme

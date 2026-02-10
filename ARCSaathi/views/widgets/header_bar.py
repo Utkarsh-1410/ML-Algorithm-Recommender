@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from PySide6.QtCore import Signal
 from PySide6.QtWidgets import (
     QComboBox,
@@ -11,6 +13,9 @@ from PySide6.QtWidgets import (
     QPushButton,
     QWidget,
 )
+
+if TYPE_CHECKING:
+    from ...config import SettingsManager
 
 
 class HeaderBar(QWidget):
@@ -22,10 +27,11 @@ class HeaderBar(QWidget):
     export_clicked = Signal()
     profile_clicked = Signal()
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, settings_manager=None):
         super().__init__(parent)
 
         self.setObjectName("HeaderBar")
+        self.settings_manager = settings_manager
 
         self.lbl_logo = QLabel("ARCSaathi")
         self.lbl_logo.setObjectName("AppLogo")
@@ -74,8 +80,23 @@ class HeaderBar(QWidget):
         self.btn_export.clicked.connect(self.export_clicked)
         self.btn_profile.clicked.connect(self.profile_clicked)
 
+        # Initialize theme button text
+        if self.settings_manager:
+            current_theme = self.settings_manager.get("ui.theme", "light")
+            self._update_theme_button_text(current_theme)
+            self.settings_manager.theme_changed.connect(self._update_theme_button_text)
+
     def _emit_project_name(self) -> None:
         self.project_name_changed.emit(self.txt_project.text().strip())
+
+    def _update_theme_button_text(self, current_theme: str) -> None:
+        """Update the settings button text based on current theme."""
+        current_theme = (current_theme or "light").lower()
+        # Show opposite theme (what will be toggled TO)
+        if current_theme == "dark":
+            self.btn_settings.setText("Light Mode")
+        else:
+            self.btn_settings.setText("Dark Mode")
 
     def set_status(self, state: str) -> None:
         """Set status text and styling state: Ready / Processing / Error."""

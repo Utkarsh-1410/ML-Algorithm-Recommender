@@ -39,14 +39,14 @@ class MainWindow(QMainWindow):
     help_requested = Signal(str)  # context
     export_requested = Signal()
 
-    def __init__(self, parent=None):
+    def __init__(self, settings_manager=None, parent=None):
         super().__init__(parent)
 
         self.setWindowTitle("ARCSaathi")
         self.setMinimumSize(1024, 768)
 
         # Header
-        self.header = HeaderBar()
+        self.header = HeaderBar(settings_manager=settings_manager)
         self.header.help_clicked.connect(self._show_help_dialog)
         self.header.settings_clicked.connect(self.theme_toggle_requested)
         self.header.export_clicked.connect(self.export_requested)
