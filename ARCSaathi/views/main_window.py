@@ -27,6 +27,7 @@ from .tabs import (
     ModelRecommenderTab,
     ExplainabilityTab,
     PredictiveMaintenanceTab,
+    HelpDocumentationTab,
 )
 from .widgets import HeaderBar, WorkflowNavigator, TabPage
 
@@ -70,6 +71,7 @@ class MainWindow(QMainWindow):
         self.tab_recommender = ModelRecommenderTab()
         self.tab_explainability = ExplainabilityTab()
         self.tab_predictive_maintenance = PredictiveMaintenanceTab()
+        self.tab_help = HelpDocumentationTab()
 
         # Wrap each in a consistent header container
         self.page_data = TabPage("Data Loading & Profiling", self.tab_data)
@@ -79,6 +81,7 @@ class MainWindow(QMainWindow):
         self.page_recommender = TabPage("Model Recommender", self.tab_recommender)
         self.page_explainability = TabPage("Explainability & Monitoring", self.tab_explainability)
         self.page_predictive_maintenance = TabPage("Predictive Maintenance", self.tab_predictive_maintenance)
+        self.page_help = TabPage("Help & Documentation", self.tab_help)
 
         self.page_data.help_clicked.connect(lambda: self.help_requested.emit("tab:data"))
         self.page_preprocess.help_clicked.connect(lambda: self.help_requested.emit("tab:preprocessing"))
@@ -87,6 +90,7 @@ class MainWindow(QMainWindow):
         self.page_recommender.help_clicked.connect(lambda: self.help_requested.emit("tab:recommender"))
         self.page_explainability.help_clicked.connect(lambda: self.help_requested.emit("tab:explainability"))
         self.page_predictive_maintenance.help_clicked.connect(lambda: self.help_requested.emit("tab:predictive_maintenance"))
+        self.page_help.help_clicked.connect(lambda: self.help_requested.emit("tab:help"))
 
         self.tabs.addTab(self.page_data, "Data Loading & Profiling")
         self.tabs.addTab(self.page_preprocess, "Preprocessing Pipeline")
@@ -95,6 +99,7 @@ class MainWindow(QMainWindow):
         self.tabs.addTab(self.page_recommender, "Model Recommender")
         self.tabs.addTab(self.page_explainability, "Explainability")
         self.tabs.addTab(self.page_predictive_maintenance, "Predictive Maintenance")
+        self.tabs.addTab(self.page_help, "Help & Documentation")
 
         # Layout: header on top, splitter for sidebar + tabs
         splitter = QSplitter(Qt.Horizontal)
@@ -221,6 +226,9 @@ class MainWindow(QMainWindow):
         
         # Predictive Maintenance tab (tab 6) is always enabled - it's a standalone feature
         self.tabs.setTabEnabled(6, True)
+        
+        # Help & Documentation tab (tab 7) is always enabled - always accessible
+        self.tabs.setTabEnabled(7, True)
 
     def _step_for_tab(self, tab_index: int) -> int:
         # Default highlight per tab
